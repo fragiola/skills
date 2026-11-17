@@ -92,6 +92,8 @@ Use it only on neutral palettes. On a chromatic `base`, text is `text-palette-co
 ## Invalid is automatic
 
 `Field.Root invalid` (Base UI sets `data-invalid`) turns the whole field into `palette-danger`.
+It needs `@fragiola/palette-danger` installed and `danger.css` imported **after** the other
+palettes ([installation](../installation.md)).
 
 ```tsx
 // Incorrect: a Tailwind variant cannot apply a palette class

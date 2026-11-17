@@ -18,7 +18,7 @@ shadcn tokens below may remain.
 | `bg-primary text-primary-foreground` | `bg-palette-base text-palette-contrast` inside a chromatic palette (`palette-blue`) |
 | `data-[state=checked]:bg-primary` | `data-checked:bg-palette-base` |
 | `destructive` variant or classes | the `palette-danger` class |
-| `focus-visible:ring-*`, `ring-offset-*` | the field frame's focus (`field-focus:outline-palette-ring`); components already have it |
+| `focus-visible:ring-*`, `ring-offset-*` | `focus-visible:outline-2 focus-visible:outline-palette-ring`; inside a field frame, `field-focus:` (fields already have it) |
 | `dark:*` | removed; every palette declares both themes |
 | `rounded-xl`, `rounded-2xl` | `rounded-lg` (the radius set is `sm`, `md`, `lg`, `full`) |
 

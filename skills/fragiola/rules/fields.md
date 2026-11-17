@@ -56,7 +56,7 @@ import { Field } from "@/components/ui/field";
 </Field.Row>
 ```
 
-`side` is logical: `inline-start` / `inline-end`.
+`side` is logical: `inline-start`, `inline-end` (default), `block-start`, `block-end`.
 
 ## Template
 
@@ -174,7 +174,15 @@ Multiple selection: `Combobox.Root multiple`, and `Combobox.Chips` **replaces**
         <Combobox.Trigger />
         <Combobox.Clear />
     </Combobox.Chips>
-    <Combobox.Content>{/* List, Item, Empty as above */}</Combobox.Content>
+    <Combobox.Content>
+        <Combobox.List>
+            {(item: { value: string; label: string }) => (
+                <Combobox.Item key={item.value} value={item.value}>
+                    {item.label}
+                </Combobox.Item>
+            )}
+        </Combobox.List>
+    </Combobox.Content>
 </Combobox.Root>
 ```
 

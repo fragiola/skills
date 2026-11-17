@@ -13,10 +13,10 @@ ways. **Always tell them apart.**
 
 | layer | what it is | items | how it is used |
 | --- | --- | --- | --- |
-| **Fragiola UI: primitives** | source code; the pieces every component is built from | atoms: `text`, `clickable`, `icon-size`, `badge`, `input` (Input, Textarea, Numeric). Style families: `field`, `popup`, `menu`, `layer`, `choice`, `disclosure`, `track`, `dock` | `npx shadcn@latest add @fragiola/<name>`. Families come in as dependencies; you rarely add one by hand |
+| **Fragiola UI: primitives** | source code; the pieces every component is built from | atoms: `text`, `clickable`, `icon-size`, `badge`, `input` (Input, Textarea, Numeric). Style families: `field`, `popup`, `menu`, `layer`, `choice`, `disclosure`, `track`, `dock` | `npx shadcn@latest add @fragiola/<name>`. Families come in as dependencies of the components (`dock` ships in `dockable`) |
 | **Fragiola UI: components** | source code, built on Base UI | `dialog`, `alert-dialog`, `drawer`, `popover`, `tooltip`, `dropdown-menu`, `context-menu`, `navigation-menu`, `select`, `combobox`, `field`, `checkbox`, `radio`, `switch`, `slider`, `progress`, `tabs`, `accordion`, `collapsible`, `breadcrumb`, `pagination`, `sidebar`, `table`, `avatar`, `skeleton`, `separator`, `chart` | `npx shadcn@latest add @fragiola/<name>` |
 | **Fragiola UI: theme** | CSS | `theme` (`global.css`), `palette-*`; helpers `cn`, `get-token` | added with the components; import the CSS once ([installation](installation.md)) |
-| **Libraries** (complex components) | headless **npm packages**: a core `@fragiola/<x>` and adapters such as `@fragiola/<x>-react` | Dockable, Data Grid, Grid Layout | `npm install @fragiola/<x>-react` (it brings and re-exports the core), then import. [Libraries](libraries.md) |
+| **Libraries** (complex components) | headless **npm packages**: a core `@fragiola/<x>` and adapters such as `@fragiola/<x>-react` | Dockable, Data Grid, Grid Layout | `npm install @fragiola/<x>-react` (it brings the core), then import from it. [Libraries](libraries.md) |
 | **Special component** | Fragiola UI source that styles a library | `dockable` (installs `@fragiola/dockable-react`) | `npx shadcn@latest add @fragiola/dockable`. [Dockable](libraries/dockable.md) |
 
 - Fragiola UI has **no npm package**: never `npm install @fragiola/ui` or import Fragiola UI from
@@ -48,7 +48,8 @@ Always enforced. Each links to a page with Incorrect/Correct pairs.
   No `variant="destructive"`.
 - **Secondary text is `text-palette-accent/85`**, placeholders too.
 - **Fields use a `palette-surface-*` palette** (neutral frame, colored focus ring).
-- **Invalid is automatic**: `Field.Root invalid` turns the subtree into `palette-danger`.
+- **Invalid is automatic**: `Field.Root invalid` turns the subtree into `palette-danger` (install
+  `@fragiola/palette-danger` and import it last).
 - **No `dark:`.** Themes switch with `data-theme="light" | "dark"` on `<html>`.
 
 ### Composition → [composition.md](rules/composition.md)
@@ -56,7 +57,7 @@ Always enforced. Each links to a page with Incorrect/Correct pairs.
 - **One namespace per component**: `Dialog.Title`, never `DialogTitle`.
 - **`render`, never `asChild`**: `<Dialog.Trigger render={<Clickable.Button variant="outline" />}>`.
 - **Dialogs are complete**: `Root` > `Portal` > `Backdrop` + `Content` > `Header` (`Title`,
-  `Description`), `Body`, `Footer`. Same shape for `AlertDialog` and `Drawer`.
+  `Description`), `Body`, `Footer`. Same for `AlertDialog`; `Drawer` adds `Viewport` > `Popup`.
 - **Menu labels live in a group**: `DropdownMenu.Group` > `DropdownMenu.Label`.
 - **Use what exists before custom markup.** There is no `Button` (use `Clickable.Button`), no
   `Card`, no `Alert`, no toast.
@@ -85,7 +86,7 @@ Coming from shadcn: [shadcn-mapping.md](rules/shadcn-mapping.md).
 
 | need | use |
 | --- | --- |
-| button, link, icon button | `Clickable.Button` (`variant` solid / outline / ghost / icon, `size` sm / md, `shape="square"`), `Clickable.Link`, `Clickable.ExternalLink` |
+| button, link, icon button | `Clickable.Button` (`variant` solid / outline / ghost / icon, `size` xs / sm / md, `shape="square"`), `Clickable.Link`, `Clickable.ExternalLink` |
 | text, headings, labels | `Text.Heading as="h2"`, `Text.Paragraph`, `Text.Small`, `Text.Label`, `Text.Error`, `Text.Link` |
 | text input | `Field` + `Input`, `Textarea` or `Numeric`; quick form row: `Input.Template.Simple` |
 | options | `Select` (pick one), `Combobox` (search, multiple, chips), `Radio` + `RadioGroup`, `Checkbox`, `Switch`, `Slider` |

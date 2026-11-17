@@ -108,8 +108,8 @@ function renderNode(child: TabsetNode<Types> | RowNode<Types>) {
 ## State attributes
 
 `data-selected` (`Tab`, `Panel`), `data-active` (`TabSet`), `data-dragging` (`Root`, `Tab`,
-`Splitter`, `DropIndicator`), `data-maximized` (`Root`, `TabSet`), `data-empty`, `data-pinned`,
-`data-visible` (`Panel`, `DropIndicator`), `data-orientation` (`Row`, `TabList`, `Splitter`),
+`Splitter`, `DropIndicator`), `data-maximized` (`Root`, `TabSet`), `data-empty` (`TabSet`,
+`TabSetContent`), `data-pinned` (`Tab`), `data-visible` (`Panel`, `DropIndicator`), `data-orientation` (`Row`, `TabList`, `Splitter`),
 `data-drop-location` and `data-drop-kind` (`DropIndicator`).
 
 ## Docs

@@ -28,8 +28,10 @@ npx shadcn@latest add @fragiola/dialog @fragiola/select
 - Always write the namespace: `@fragiola/field`. A bare `field` installs **shadcn's** item.
 - `registryDependencies` resolve recursively: `dialog` also brings `layer`, `text`, `clickable`,
   `cn` and `theme`. Do not add them by hand.
-- Palettes are items too: `npx shadcn@latest add @fragiola/palette-blue`. Components depend on
-  the ones they need (`sidebar` brings `palette-raised` and `palette-surface`).
+- Palettes are items too: `npx shadcn@latest add @fragiola/palette-blue`. Only `sidebar` and
+  `dockable` depend on palettes (`palette-surface`, `palette-raised`). **Add every other palette
+  yourself**: `palette-surface` for the floor, `palette-danger` (it also styles invalid fields),
+  a `palette-surface-*` for fields, the chromatic ones you use.
 
 ## 3. Where files land
 
@@ -63,8 +65,12 @@ installed palette** once, after Tailwind (paths relative to the entry):
 @import "../styles/global.css";
 @import "../styles/palettes/surface.css";
 @import "../styles/palettes/raised.css";
+@import "../styles/palettes/surface-blue.css";
 @import "../styles/palettes/danger.css";
 ```
+
+Import `danger.css` **last**: its `[data-invalid]` rule has the same specificity as the other
+palettes, so a palette imported after it would win over an invalid field.
 
 `global.css` imports `tw-animate-css`. Install that package if the project does not have it.
 

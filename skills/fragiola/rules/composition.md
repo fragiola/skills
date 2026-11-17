@@ -14,7 +14,8 @@ import { Dialog } from "@/components/ui/dialog";
 <Dialog.Title>Edit profile</Dialog.Title>
 ```
 
-`RadioGroup` is the one named export beside its namespace: `import { Radio, RadioGroup }`.
+A few exports are plain components or hooks: `RadioGroup` (beside `Radio`), `Separator`,
+`Skeleton`, `Chart`, `Badge`, `useSidebar`.
 
 ## `render`, never `asChild`
 
@@ -44,7 +45,7 @@ import { Clickable } from "@/components/atoms/clickable";
 <Clickable.Link href="/docs">Docs</Clickable.Link>
 ```
 
-`variant`: `solid` (default), `outline`, `ghost`, `icon`. `size`: `sm`, `md` (default). `shape`:
+`variant`: `solid` (default), `outline`, `ghost`, `icon`. `size`: `xs`, `sm`, `md` (default). `shape`:
 `auto` (default), `square`. Color comes from a palette class, not a prop.
 
 ## Dialog and AlertDialog

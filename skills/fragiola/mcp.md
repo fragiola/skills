@@ -57,7 +57,8 @@ unset, it reads fragiola.com.
 4. Install it: `get_install_command`, then run what it returns.
 5. Write the code from what you read, following the rules in [SKILL.md](SKILL.md).
 
-The server knows what is published. Its answers win over this skill's tables when they differ.
+The server reads fragiola.com's index. For what exists and what its docs say, its answers win
+over this skill's tables. It does not query npm: check a library with `npm view`.
 
 ## When the server is not available
 

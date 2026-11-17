@@ -16,16 +16,20 @@ teaches the others.
   dependencies.
 - **Adapters** per framework: `@fragiola/<x>-react`, and `-vue` / `-angular` where the library
   ships them.
-- A React app installs **only the adapter**. It depends on the core and re-exports it, so
-  `createModel`, types and helpers are imported from `@fragiola/<x>-react`.
+- A React app installs **only the adapter**: it depends on the core. Import from the adapter.
+  Dockable and Grid Layout re-export their whole core; Data Grid re-exports its core types and
+  helpers (`veto`, `headerCellContent`). Installing the core as well (as MCP
+  `get_install_command` lists it) is harmless.
+- Creating a model: Dockable takes one you create (`createModel<Types>(json)`, passed to
+  `Dockable.Root model`). `DataGrid.Root` and `GridLayout.Root` create their own from their
+  props; read it with the library's hook or ref.
 
 ```bash
 npm install @fragiola/dockable-react
 ```
 
-Check that a package is published before installing it: `npm view @fragiola/<x>-react version`
-(or MCP `get_install_command`). If it is not, say so. Do not install from GitHub or invent a
-version.
+Check that a package is published before installing it: `npm view @fragiola/<x>-react version`.
+If it is not, say so. Do not install from GitHub or invent a version.
 
 ## Headless
 
@@ -42,7 +46,7 @@ version.
   `<GridLayout.Items>{(item) => <GridLayout.Item itemId={item.id} />}</GridLayout.Items>`.
 - Swap the element with `render`, never `asChild`. `render` may be a function of the part's
   state.
-- `className` and `style` accept a string or a function of the state.
+- `className` (a string) and `style` (an object) also accept a function of the state.
 
 ## The model API
 
@@ -51,7 +55,7 @@ question goes through a verb.
 
 | verb | does |
 | --- | --- |
-| `model.run(command, payload)` | runs and commits a command; returns `{ ok: true, … }` or `{ ok: false, error }`, never throws |
+| `model.run(command, payload)` | runs and commits a command; returns `{ ok: true, … }` or `{ ok: false, error }`; bad input never throws |
 | `model.can(command, payload)` | whether it would apply now (nothing is committed) |
 | `model.check(command, payload)` | what it would return now |
 | `model.get(key, payload?)` | reads a value |
@@ -74,9 +78,10 @@ Undo/redo, persistence, translations and permissions are not in the packages. Bu
 
 ## Typed data
 
-Each library takes a `Types` registry that types the app's data (a tab's data, a row, an item).
-Pass it as a generic (`createModel<Types>(json)`, `Dockable.TabList<Types>`), and never use
-`any`.
+Type the app's data with the library's generics, never `any`:
+
+- Dockable: a `Types` registry (`createModel<Types>(json)`, `Dockable.TabList<Types>`).
+- Data Grid: the row type (`Column<Person>[]`, `DataGrid.Rows<Person>`).
 
 ## Docs
 
