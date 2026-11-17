@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fragiola"
+  short_description: "Builds UIs with Fragiola UI source components, palettes and the headless @fragiola/* libraries."

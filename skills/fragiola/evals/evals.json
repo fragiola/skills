@@ -1,0 +1,112 @@
+{
+    "skill_name": "fragiola",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "In my React app that uses Fragiola UI, create a sign-up form with name, email, a country select and a 'subscribe to the newsletter' switch. Show a validation error on the email field.",
+            "expected_output": "A form built from Field.Root + Field.Row + Field.Body + Input, Select inside Field.Root, Switch inside Field.ChoiceRoot, Field.Root invalid with Field.Error, surface-ring palettes.",
+            "files": [],
+            "expectations": [
+                "Wraps each Input in Field.Root > Field.Row > Field.Body (no border, background or height classes on the Input)",
+                "Puts Select.Root directly inside Field.Root with Select.Trigger > Select.Value, without Field.Row",
+                "Puts the Switch (Switch.Root > Switch.Thumb) in Field.ChoiceRoot with a Field.Label linked by htmlFor",
+                "Shows the error with Field.Root invalid and Field.Error, not with red color classes or aria-invalid classes",
+                "Uses a palette-surface-* class on the fields, and only palette role utilities for color",
+                "Imports from the project aliases (@/components/ui/field, @/components/atoms/fields), never from an npm package"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "Add a Fragiola dialog that asks the user to confirm deleting a project, with Cancel and Delete buttons.",
+            "expected_output": "AlertDialog (or Dialog) with Root, Trigger using render, Portal, Backdrop, Content, Header with Title and Description, Footer with Close and a palette-danger Clickable.Button.",
+            "files": [],
+            "expectations": [
+                "Installs or uses @fragiola/alert-dialog or @fragiola/dialog with the namespace written (npx shadcn@latest add @fragiola/...)",
+                "Renders Portal and Backdrop explicitly, and a Title inside Header",
+                "Uses render={<Clickable.Button ... />} on Trigger and Close, never asChild",
+                "Makes the Delete button destructive with className=\"palette-danger\", not variant=\"destructive\"",
+                "Uses Clickable.Button, not a Button component"
+            ]
+        },
+        {
+            "id": 3,
+            "prompt": "Build a settings page section: a card with a heading, a short secondary description and a list of three toggles. The card should be tinted with the purple accent on focus.",
+            "expected_output": "A div surface with palette-raised and role utilities (no Card component), Text.Heading, text-palette-accent/85 description, Switches in Field.ChoiceRoot with palette-surface-purple.",
+            "files": [],
+            "expectations": [
+                "Does not import a Card component; builds the surface with palette-raised bg-palette-base border border-palette-line",
+                "Writes secondary text with text-palette-accent/85, not text-muted-foreground or another opacity",
+                "Uses palette-surface-purple (not palette-purple) for the fields' focus ring",
+                "Uses no dark: classes and no Tailwind color scale classes (bg-white, text-gray-500, bg-purple-500)",
+                "Uses logical inline properties (ps/pe, ms/me) instead of pl/pr, ml/mr"
+            ]
+        },
+        {
+            "id": 4,
+            "prompt": "Convert this shadcn button group to Fragiola UI: <Button variant=\"destructive\" asChild><a href=\"/delete\">Delete</a></Button><Button variant=\"outline\" size=\"icon\"><PlusIcon className=\"mr-2\" /></Button><p className=\"text-muted-foreground\">Two actions</p>",
+            "expected_output": "Clickable.Button with palette-danger and render (or Clickable.Link), an icon button with variant=\"icon\" shape=\"square\" and an aria-label, text-palette-accent/85, no shadcn tokens left.",
+            "files": [],
+            "expectations": [
+                "Replaces asChild with render or with Clickable.Link",
+                "Replaces variant=\"destructive\" with className=\"palette-danger\"",
+                "Replaces size=\"icon\" with variant=\"icon\" shape=\"square\" and gives the icon button an aria-label",
+                "Replaces text-muted-foreground with text-palette-accent/85",
+                "Replaces mr-2 with a logical property (me-2) or removes it",
+                "Leaves no shadcn token (muted, destructive, primary, foreground, background) in the result"
+            ]
+        },
+        {
+            "id": 5,
+            "prompt": "I need an IDE-like layout with a file editor on the left and a preview on the right, with draggable tabs, using Fragiola UI.",
+            "expected_output": "npx shadcn@latest add @fragiola/dockable, createModel from @fragiola/dockable-react with a typed LayoutJson, Dockable.Template.Simple from @/components/ui/dockable with a sized root and a surface-tier palette.",
+            "files": [],
+            "expectations": [
+                "Installs the styled component with npx shadcn@latest add @fragiola/dockable (or uses the headless @fragiola/dockable-react primitives on purpose)",
+                "Imports createModel and LayoutJson from @fragiola/dockable-react and Dockable from @/components/ui/dockable",
+                "Declares a Types registry and a LayoutJson with version 1 and a root row of two tabsets",
+                "Creates the model once (useState(() => createModel<Types>(json)))",
+                "Gives the root a size (h-full or a sized container) and a surface-tier palette",
+                "Does not invent props or parts that are not in Dockable's docs"
+            ]
+        },
+        {
+            "id": 6,
+            "prompt": "Show 100,000 orders in a grid with sortable columns using Fragiola, styled with the Fragiola UI palettes.",
+            "expected_output": "npm install @fragiola/data-grid-react, Column definitions, DataGrid.Root with rows, rowKey and a height, DataGrid.Grid with Header and Body, styling through palette roles and data-* attributes.",
+            "files": [],
+            "expectations": [
+                "Installs @fragiola/data-grid-react with the package manager, not with the shadcn CLI",
+                "Gives DataGrid.Root columns, rows, rowKey and a height",
+                "Renders DataGrid.Grid with an aria-label, DataGrid.Header and DataGrid.Body",
+                "Styles state through data-* attributes (data-active, data-selected, data-sort) with palette role utilities",
+                "Does not claim a styled @fragiola/data-grid registry component exists"
+            ]
+        },
+        {
+            "id": 7,
+            "prompt": "Build a dashboard with draggable and resizable widgets with @fragiola/grid-layout, and save the layout when it changes.",
+            "expected_output": "npm install @fragiola/grid-layout-react, GridLayout.Root controlled with layout + onLayoutChange, Items/Item children function, ResizeHandle and Placeholder, persistence in the app.",
+            "files": [],
+            "expectations": [
+                "Installs @fragiola/grid-layout-react (the adapter brings the core)",
+                "Uses GridLayout.Root with layout and onLayoutChange (controlled) and cols / rowHeight",
+                "Renders items with GridLayout.Items and a children function returning GridLayout.Item itemId={item.id}",
+                "Adds GridLayout.ResizeHandle with an aria-label and a GridLayout.Placeholder",
+                "Keeps persistence in the app (onLayoutChange or model.get(\"layout\")), not as an option of the library"
+            ]
+        },
+        {
+            "id": 8,
+            "prompt": "Which Fragiola components exist for showing a menu of actions, and how do I install the right one? Use the Fragiola MCP server if it is available.",
+            "expected_output": "Uses search_fragiola or list_components, then get_component or get_docs, then get_install_command; answers with DropdownMenu / ContextMenu as Fragiola UI source installed with the shadcn CLI.",
+            "files": [],
+            "expectations": [
+                "Calls search_fragiola or list_components before answering, when the server is available",
+                "Reads the component with get_component or get_docs before writing code",
+                "Gets the install command from get_install_command (npx shadcn@latest add @fragiola/dropdown-menu)",
+                "Says the component is source code copied into the project, not an npm package",
+                "When the server is unavailable, falls back to fragiola.com docs or npx shadcn@latest view, without inventing tools"
+            ]
+        }
+    ]
+}
