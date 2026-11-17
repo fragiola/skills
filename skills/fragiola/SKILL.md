@@ -16,8 +16,8 @@ ways. **Always tell them apart.**
 | **Fragiola UI: primitives** | source code; the pieces every component is built from | atoms: `text`, `clickable`, `icon-size`, `badge`, `input` (Input, Textarea, Numeric). Style families: `field`, `popup`, `menu`, `layer`, `choice`, `disclosure`, `track`, `dock` | `npx shadcn@latest add @fragiola/<name>`. Families come in as dependencies; you rarely add one by hand |
 | **Fragiola UI: components** | source code, built on Base UI | `dialog`, `alert-dialog`, `drawer`, `popover`, `tooltip`, `dropdown-menu`, `context-menu`, `navigation-menu`, `select`, `combobox`, `field`, `checkbox`, `radio`, `switch`, `slider`, `progress`, `tabs`, `accordion`, `collapsible`, `breadcrumb`, `pagination`, `sidebar`, `table`, `avatar`, `skeleton`, `separator`, `chart` | `npx shadcn@latest add @fragiola/<name>` |
 | **Fragiola UI: theme** | CSS | `theme` (`global.css`), `palette-*`; helpers `cn`, `get-token` | added with the components; import the CSS once ([installation](installation.md)) |
-| **Libraries** (complex components) | headless **npm packages**: a core `@fragiola/<x>` and adapters `@fragiola/<x>-react` | Dockable, Data Grid, Grid Layout | `npm install` the core and the adapter, then import |
-| **Special component** | Fragiola UI source that styles a library | `dockable` (installs `@fragiola/dockable-react`) | `npx shadcn@latest add @fragiola/dockable` |
+| **Libraries** (complex components) | headless **npm packages**: a core `@fragiola/<x>` and adapters such as `@fragiola/<x>-react` | Dockable, Data Grid, Grid Layout | `npm install @fragiola/<x>-react` (it brings and re-exports the core), then import. [Libraries](libraries.md) |
+| **Special component** | Fragiola UI source that styles a library | `dockable` (installs `@fragiola/dockable-react`) | `npx shadcn@latest add @fragiola/dockable`. [Dockable](libraries/dockable.md) |
 
 - Fragiola UI has **no npm package**: never `npm install @fragiola/ui` or import Fragiola UI from
   `@fragiola/*`. Import the copied files through the project's aliases
@@ -31,7 +31,7 @@ ways. **Always tell them apart.**
 
 When the `fragiola` MCP server is available, use it to find what exists and to read docs before
 writing code: `search_fragiola`, `get_component`, `get_docs`, `get_api`,
-`get_install_command`.
+`get_install_command`. Setup, tools and fallback: [mcp.md](mcp.md).
 
 ## Critical Rules
 
@@ -107,7 +107,7 @@ Coming from shadcn: [shadcn-mapping.md](rules/shadcn-mapping.md).
 2. **Read it.** MCP `get_component` (`include_code` for source) or `get_docs`; for a library,
    `get_api`. Never invent parts, props or commands.
 3. **Install it.** Fragiola UI: [installation](installation.md). Library: the
-   library page.
+   [library page](libraries.md).
 4. **Compose it** as the docs examples do, following the rules above.
 5. **Verify by compiling**: typecheck, build, and look at the page in both themes.
 
@@ -121,7 +121,7 @@ npx shadcn@latest add @fragiola/dialog --dry-run
 npx shadcn@latest view @fragiola/sidebar
 
 # Libraries (npm packages)
-npm install @fragiola/dockable @fragiola/dockable-react
+npm install @fragiola/dockable-react
 npm view @fragiola/<x>-react version
 
 # MCP server
@@ -136,3 +136,7 @@ npx fragiola@latest mcp init --client claude
 - [rules/fields.md](rules/fields.md): the field frame, controls, addons, choices, select, states
 - [rules/styling.md](rules/styling.md): families, logical properties, tokens, density, `cn`
 - [rules/shadcn-mapping.md](rules/shadcn-mapping.md): shadcn tokens and APIs → Fragiola
+- [libraries.md](libraries.md): how every Fragiola library works
+- [libraries/dockable.md](libraries/dockable.md), [libraries/data-grid.md](libraries/data-grid.md),
+  [libraries/grid-layout.md](libraries/grid-layout.md)
+- [mcp.md](mcp.md): the Fragiola MCP server
